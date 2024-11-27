@@ -30,7 +30,7 @@ const headerLayoutPath = join(__dirname, '/layouts/header.hbs');
 const footerLayoutPath = join(__dirname, '/layouts/footer.hbs');
 
 function getAllStyles(options) {
-  const cssStyleSheets = [];
+  let cssStyleSheets = [];
 
   // GitHub Markdown Style
   if (options.ghStyle) {
@@ -46,7 +46,7 @@ function getAllStyles(options) {
 
   // Optional user given CSS
   if (options.styles) {
-    cssStyleSheets.push(options.styles);
+    cssStyleSheets = cssStyleSheets.concat(options.styles);
   }
 
   return {

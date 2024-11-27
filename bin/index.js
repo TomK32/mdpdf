@@ -53,6 +53,7 @@ const cli = meow(
       style: {
         type: 'string',
         shortFlag: 's',
+        isMultiple: true,
       },
       header: {
         type: 'string',
@@ -100,6 +101,7 @@ const destination =
   cli.input[1] || source.slice(0, source.indexOf('.md')) + '.pdf';
 const debug = cli.flags.debug || false;
 let style = cli.flags.style;
+let style_files = style.map(function(s) { return resolve(s); });
 const header = cli.flags.header;
 const headerHeight = cli.flags.hHeight;
 const footer = cli.flags.footer;
@@ -130,7 +132,7 @@ const options = {
   defaultStyle: true,
   source: resolve(source),
   destination: resolve(destination),
-  styles: style ? resolve(style) : null,
+  styles: style ? style_files : null,
   header: header ? resolve(header) : null,
   footer: footer ? resolve(footer) : null,
   noEmoji: cli.flags.noEmoji || false,
